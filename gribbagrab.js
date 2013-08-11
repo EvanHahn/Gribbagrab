@@ -17,6 +17,9 @@ Some implementation details:
 - "use strict" while you're developing, but not in the real world. It's an easy
   way to eliminate 13 characters.
 
+- I'm cool with formal JSHint support, but JSLint is my enemy. I haven't added
+  either, but you could submit a pull request. I'll love it.
+
 - I thought about adding element.type = "text/javascript" or "text/css", but I
   figured that if you're using this, you're smart enough not to serve the wrong
   MIME types. I didn't want to add the extra bytes.
