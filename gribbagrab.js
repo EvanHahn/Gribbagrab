@@ -39,6 +39,7 @@ Some implementation details:
 
 	// utility function to inject a .css or .js file
 	var inject = function(src, options) {
+		options = options || {};
 		var element;
 		var extension = src.substr(src.lastIndexOf('.'));
 		if (extension === '.css') {
@@ -58,13 +59,21 @@ Some implementation details:
 	};
 
 	// the big kahuna
-	win.gribbagrab = function(dependencies, callback) {
+	win.gribbagrab = function(dependencies, allDone) {
 
 		// so far, we have nothing to load, but we'll increment this
 		var toLoad = 0;
 
 		// nothing's failed so far, either
 		var anythingFailed = false;
+
+		// if it's passed a string, run that file last
+		var callback;
+		if (!(allDone instanceof Function)) {
+			callback = function() { inject(allDone); };
+		} else {
+			callback = allDone;
+		}
 
 		dependencies.forEach(function(dependency) {
 
