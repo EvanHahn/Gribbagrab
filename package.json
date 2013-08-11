@@ -1,0 +1,10 @@
+{
+  "name": "Deepend",
+  "version": "0.1.0",
+  "description": "Asynchronous loader that I wanted.",
+  "scripts": {
+    "test": "mocha"
+  },
+  "author": "Evan Hahn",
+  "license": "MIT"
+}
