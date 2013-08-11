@@ -6,5 +6,5 @@
     "test": "mocha"
   },
   "author": "Evan Hahn",
-  "license": "MIT"
+  "license": "Unlicense"
 }
