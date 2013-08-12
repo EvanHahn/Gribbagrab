@@ -28,6 +28,9 @@ Some implementation details:
 
 ;(function(win, doc) {
 
+	// configurations
+	var IMAGE_EXTENSIONS = ['.png', '.gif', '.jpg', '.jpeg', '.svg'];
+
 	// document.head isn't always defined
 	var head = doc.head || (doc.getElementsByTagName('head')[0]);
 
@@ -43,13 +46,17 @@ Some implementation details:
 			element = doc.createElement('link');
 			element.rel = 'stylesheet';
 			element.href = src;
+		} else if (IMAGE_EXTENSIONS.indexOf(extension) !== -1) {
+			element = new Image;
+			element.src = src;
 		} else {
 			element = doc.createElement('script');
 			element.src = src;
 		}
 		element.onload = options.success || noop;
 		element.onerror = options.failure || noop;
-		head.appendChild(element);
+		if (!(element instanceof Image))
+			head.appendChild(element);
 	};
 
 	// the big kahuna
