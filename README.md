@@ -85,10 +85,8 @@ You'll need Array.prototype.forEach to get this to work. That's all good in new 
 More formally, I expose one function, called `gribbagrab`. It takes two arguments:
 
 1. An array of things to load. For each element in the array...
-
    - If an element is a string, it'll load that resource. You can specify fallbacks by adding spaces: `try_this.js then_this.js finally_this.js`. Once one of them succeeds, it doesn't load the rest.
    - If an element is an array of strings, it'll load those scripts in order. These strings can be formatted like the above; you can use spaces to specify fallbacks.
-
 2. A callback to execute when it's all done. You can also specify a file, which will run last. If you specify a callback, you'll be passed an array of the dependencies that failed.
 
 Epilogue
