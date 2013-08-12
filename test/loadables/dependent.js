@@ -1,0 +1,1 @@
+window.grubba = 12;

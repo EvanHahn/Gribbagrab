@@ -1,0 +1,1 @@
+window.tubba = "blubba";

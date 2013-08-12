@@ -28,9 +28,6 @@ Some implementation details:
 
 ;(function(win, doc) {
 
-	// some cool configurations, baby
-	var IMAGE_EXTENSIONS = ['.png', '.gif', '.jpg', '.jpeg', '.svg'];
-
 	// document.head isn't always defined
 	var head = doc.head || (doc.getElementsByTagName('head')[0]);
 
@@ -45,10 +42,7 @@ Some implementation details:
 		if (extension === '.css') {
 			element = doc.createElement('link');
 			element.rel = 'stylesheet';
-			element.src = src;
-		} else if (IMAGE_EXTENSIONS.indexOf(extension) !== -1) {
-			element = new Image;
-			image.src = src;
+			element.href = src;
 		} else {
 			element = doc.createElement('script');
 			element.src = src;
@@ -61,12 +55,6 @@ Some implementation details:
 	// the big kahuna
 	win.gribbagrab = function(dependencies, allDone) {
 
-		// so far, we have nothing to load, but we'll increment this
-		var toLoad = 0;
-
-		// nothing's failed so far, either
-		var anythingFailed = false;
-
 		// if it's passed a string, run that file last
 		var callback;
 		if (!(allDone instanceof Function)) {
@@ -74,6 +62,16 @@ Some implementation details:
 		} else {
 			callback = allDone;
 		}
+
+		// if we're not passed anything, let's just quit now
+		if (dependencies.length === 0)
+			callback([]);
+
+		// so far, we have nothing to load, but we'll increment this
+		var toLoad = 0;
+
+		// keep track of failures
+		var failures = [];
 
 		dependencies.forEach(function(dependency) {
 
@@ -84,6 +82,8 @@ Some implementation details:
 					toLoad --;
 					if (dependency.length)
 						gribbagrab([dependency.shift()], done);
+					else if (toLoad === 0)
+						callback(failures);
 				};
 				gribbagrab([dependency.shift()], done);
 			}
@@ -91,21 +91,22 @@ Some implementation details:
 			// if it's a single file, load only one of them
 			else {
 				toLoad ++;
-				var srcs = dependency.split(/\W+/g);
+				var srcs = dependency.split(/\s+/g);
 				var tryNext = function() {
 					if (srcs.length) {
 						inject(srcs.shift(), {
 							success: function() {
 								toLoad --;
 								if (toLoad === 0)
-									callback(anythingFailed);
+									callback(failures);
 							},
 							failure: tryNext
 						});
 					} else {
-						anythingFailed = true;
+						toLoad --;
+						failures.push(dependency);
 						if (toLoad === 0)
-							callback(anythingFailed);
+							callback(failures);
 					}
 				};
 				tryNext();

@@ -61,9 +61,6 @@ Here's how you use it:
       // this supports the fallback syntax too
       ['underscore.js', 'backbone.js'],
 
-      // so...like, what about images?
-      'logo.png',
-
       // load some CSS
       'vendor/bootstrap.css'
 
