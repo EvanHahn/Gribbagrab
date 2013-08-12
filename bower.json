@@ -1,0 +1,23 @@
+{
+	"name": "Gribbagrab",
+	"version": "0.1.0",
+	"description": "An asynchronous loader.",
+	"main": "gribbagrab.js",
+	"keywords": [
+		"asynchronous", "loader", "dependency"
+	],
+	"homepage": "https://github.com/EvanHahn/Gribbagrab",
+	"bugs": "https://github.com/EvanHahn/Gribbagrab/issues",
+	"author": {
+		"name": "Evan Hahn",
+		"email": "me@evanhahn.com",
+		"url": "http://evanhahn.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:EvanHahn/dotfiles.git"
+	},
+	"licenses": [{
+		"type": "Unlicense"
+	}]
+}
