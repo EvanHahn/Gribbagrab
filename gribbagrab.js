@@ -64,10 +64,12 @@ Some implementation details:
 
 		// if it's passed a string, run that file last
 		var callback;
-		if (!(allDone instanceof Function)) {
-			callback = function() { inject(allDone); };
-		} else {
+		if (allDone instanceof Function) {
 			callback = allDone;
+		} else if (!allDone) {
+			callback = noop;
+		} else {
+			callback = function() { inject(allDone); };
 		}
 
 		// if we're not passed anything, let's just quit now
