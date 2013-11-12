@@ -15,7 +15,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git@github.com:EvanHahn/dotfiles.git"
+		"url": "git@github.com:EvanHahn/Gribbagrab.git"
 	},
 	"licenses": [{
 		"type": "Unlicense"
